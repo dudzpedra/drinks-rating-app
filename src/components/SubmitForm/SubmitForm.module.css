@@ -1,0 +1,23 @@
+.container {
+    width: 90%;
+    margin: 0.5rem auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.container input {
+    margin: 1rem 0;
+}
+
+.container button {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.success {
+    text-align: center;
+    color: green;
+    border: 1px solid green;
+    width: 50%;
+    margin: 0.5rem auto;
+}

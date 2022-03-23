@@ -1,0 +1,12 @@
+.container {
+    width: 50%;
+    margin: 1rem auto;
+}
+
+h2 {
+    text-align: start;
+}
+
+ul {
+    list-style: circle;
+}

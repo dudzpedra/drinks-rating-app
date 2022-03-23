@@ -46,7 +46,7 @@ const initialState: Cocktail[] = [
     },
 ]
 
-const ratingReducer = (state = initialState, action: any) => {
+const cocktailReducer = (state = initialState, action: any) => {
     switch(action.type) {
         case 'NEW_DRINK':
             return [...state, action.payload]
@@ -55,6 +55,6 @@ const ratingReducer = (state = initialState, action: any) => {
     }
 }
 
-const store = createStore(ratingReducer)
+const store = createStore(cocktailReducer)
 
 export default store
