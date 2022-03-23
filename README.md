@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Sip N' Review
+A simple App to provide cocktail feedback for some local pubs.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Techs
+- Typescript
+- Redux
+- React Router
 
 ## Available Scripts
 

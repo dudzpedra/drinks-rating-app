@@ -1,15 +1,20 @@
+import { Cocktail } from '../../store';
 import styles from './Details.module.css'
 
-const Details: React.FC = () => {
+type DetailsProps = {
+    drink: Cocktail
+}
+
+const Details = ({ drink }: DetailsProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.row}>
-        <p>average rating</p>
+        <p>average rating: {drink.rating}</p>
         <p>[qtd] reviews</p>
       </div>
       <div className={styles.row}>
-        <p>nome do drink</p>
-        <p>autor do drink</p>
+        <p>{drink.title}, by {drink.artist}</p>
+        <p>{drink.vendor}</p>
       </div>
     </div>
   );

@@ -1,13 +1,10 @@
 import React from 'react'
-import Details from '../Details'
-import Avatar from '../ui/Avatar'
 import styles from './Card.module.css'
 
-const Card: React.FC = () => {
+const Card: React.FC = ({ children }) => {
     return (
         <div className={styles.card}>
-            <Avatar />
-            <Details />
+            {children}
         </div>
     )
 }

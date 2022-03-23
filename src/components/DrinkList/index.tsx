@@ -1,11 +1,19 @@
 import styles from './DrinkList.module.css'
 import Card from "../Card"
+import store from '../../store'
+import Avatar from '../ui/Avatar'
+import Details from '../Details'
 
 const DrinkList = () => {
+    const drinks = store.getState()
+    console.log(drinks)
     return (
         <div className={styles.grid}>
-            {[0, 1, 2, 3, 4, 5].map(item => (
-                <Card key={item} />
+            {drinks.map((drink) => (
+                <Card key={drink.id}>
+                    <Avatar />
+                    <Details drink={drink} />
+                </Card>
             ))}
         </div>
     )
