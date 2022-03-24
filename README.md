@@ -1,10 +1,14 @@
 # Sip N' Review
 A simple App to provide cocktail feedback for some local pubs.
 
+## Demo
+[Sip N' Review App](https://main.dwwyglkaixd3c.amplifyapp.com/)
+
 ## Techs
 - Typescript
 - Redux
 - React Router
+- AWS Amplify
 
 ## Available Scripts
 
