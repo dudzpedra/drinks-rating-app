@@ -1,12 +1,12 @@
 import { useState } from "react";
 import store, { Cocktail } from "../../store";
 import styles from "./SubmitForm.module.css";
+import { createCocktail } from "../../store";
 
 const SubmitForm = () => {
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [vendor, setVendor] = useState("");
-  const [rating, setRating] = useState(0);
   const [successMsg, setSuccessMsg] = useState("");
 
   const addCocktail = (e: any) => {
@@ -15,17 +15,16 @@ const SubmitForm = () => {
       artist,
       title,
       vendor,
-      rating,
+      average: 0,
       id: store.getState().length + 1,
+      reviews: 0,
+      ratings: []
     };
-    store.dispatch({
-      type: "NEW_DRINK",
-      payload: newCocktail,
-    });
+    store.dispatch(createCocktail(newCocktail));
     setTitle("");
     setArtist("");
     setVendor("");
-    setRating(0);
+    //setAverage(0);
     setSuccessMsg("Cocktail added successfully.");
     setTimeout(() => setSuccessMsg(""), 3000);
   };
@@ -63,18 +62,6 @@ const SubmitForm = () => {
           name="vendor"
           id="vendor"
           placeholder="Vendor"
-        />
-        <label htmlFor="rating">What's the rating (0 to 5)?</label>
-        <input
-          required
-          min={0}
-          max={5}
-          value={rating}
-          onChange={({ target }) => setRating(Number(target.value))}
-          type="number"
-          name="rating"
-          id="rating"
-          placeholder="rating"
         />
         <button>Submit Cocktail</button>
       </form>

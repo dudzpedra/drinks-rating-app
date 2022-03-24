@@ -1,60 +1,52 @@
-import { createStore } from 'redux'
+import { createStore } from "redux";
+import { initialState } from "./data";
 
 export interface Cocktail {
-    title: string
-    artist: string
-    vendor: string
-    rating: number
-    id: number
+  title: string;
+  artist: string;
+  vendor: string;
+  average: number;
+  id: number;
+  reviews: number;
+  ratings: number[];
 }
-
-const initialState: Cocktail[] = [
-    {
-        title: 'Anelis',
-        artist: 'Mari Mesquita',
-        vendor: 'Empório Iracema',
-        rating: 4,
-        id: 1
-    },
-    {
-        title: 'Dandara',
-        artist: 'Adriana Pino',
-        vendor: 'Empório Iracema',
-        rating: 5,
-        id: 2
-    },
-    {
-        title: 'Cecília',
-        artist: 'Giovanna Marvin',
-        vendor: 'Empório Iracema',
-        rating: 4,
-        id: 3
-    },
-    {
-        title: 'Elena',
-        artist: 'Lais Ladrine',
-        vendor: 'Empório Iracema',
-        rating: 5,
-        id: 4
-    },
-    {
-        title: 'Elza',
-        artist: 'Ana Negra',
-        vendor: 'Empório Iracema',
-        rating: 5,
-        id: 5
-    },
-]
 
 const cocktailReducer = (state = initialState, action: any) => {
-    switch(action.type) {
-        case 'NEW_DRINK':
-            return [...state, action.payload]
-        default:
-            return state
+  switch (action.type) {
+    case "NEW_DRINK":
+      return [...state, action.payload];
+    case 'UPDATE_DRINK': {
+      const obj = action.payload.drink
+      const rating = action.payload.rating
+      const updatedDrink = {
+        ...obj,
+        ratings: obj.ratings.concat(rating),
+        reviews: obj.reviews + 1
+      }
+      return state.map(drink => drink.id === obj.id ? updatedDrink : drink)
     }
+    default:
+      return state;
+  }
+};
+
+const store = createStore(cocktailReducer);
+
+export const createCocktail = (drink: Cocktail) => {
+  return {
+    type: 'NEW_DRINK',
+    payload: drink
+  }
 }
 
-const store = createStore(cocktailReducer)
+export const updateCocktail = (drink: Cocktail, rating: number) => {
+  return {
+    type: 'UPDATE_DRINK',
+    payload: {
+      drink,
+      rating
+    }
+  }
+}
 
-export default store
+export default store;

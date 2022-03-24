@@ -6,11 +6,12 @@ type DetailsProps = {
 }
 
 const Details = ({ drink }: DetailsProps) => {
+  const labelToShow = drink.reviews === 1 ? 'review' : 'reviews'
   return (
     <div className={styles.container}>
       <div className={styles.row}>
-        <p>average rating: {drink.rating}</p>
-        <p>[qtd] reviews</p>
+        <p>Rating: {drink.average | 0}</p>
+        <p>{drink.reviews}{' '}{labelToShow}</p>
       </div>
       <div className={styles.row}>
         <p>{drink.title}, by {drink.artist}</p>
