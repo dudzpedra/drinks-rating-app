@@ -1,10 +1,26 @@
 .container {
-    width: 80%;
-    margin: 0 auto;  
+    width: 90%;
+    height: 40%;
+    margin: 0 auto;
+    font-size: 0.65em;
+    display: flex;
+    flex-direction: column;  
 }
 
 .row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+    .container {
+        font-size: 0.7em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        font-size: 0.85em;
+    }
 }

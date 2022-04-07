@@ -1,6 +1,6 @@
 .card {
-    width: 95%;
-    margin: 0 auto;
-    color: peru;
-    padding: 0.5rem;
+    height: 40vh;
+    box-shadow: 0 4px 8px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
 }

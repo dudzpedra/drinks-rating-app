@@ -4,39 +4,44 @@ import store, { Cocktail } from "../../store";
 import Avatar from "../ui/Avatar";
 import Details from "../Details";
 import { useState } from "react";
-import { updateCocktail } from "../../store";
+import { updateCocktail } from "../../store/drinkReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const DrinkList = () => {
-  const drinks = store.getState();
+  const drinks = store.getState().drinks;
+  const cocktails = useSelector((state) => state);
+  console.log("cocktails", cocktails);
+  const dispatch = useDispatch();
 
-  const [newRating, setNewRating] = useState('');
+  const [newRating, setNewRating] = useState("");
 
   const handleRating = (drink: Cocktail): void => {
     if (newRating) {
-      store.dispatch(updateCocktail(drink, Number(newRating)));
-      setNewRating('')
+      dispatch(updateCocktail(drink, Number(newRating)));
+      setNewRating("");
     } else {
-      alert('Please choose a rating between 0 and 5 stars')
+      alert("Please choose a rating between 0 and 5 stars");
     }
   };
   return (
     <div>
-      <label htmlFor="rating">Enter a new rating:</label>
-      <input
-        type="number"
-        name="rating"
-        id="rating"
-        min={0}
-        max={5}
-        value={newRating}
-        onChange={({ target }) => setNewRating(target.value)}
-      />
+      <div className={styles.rating}>
+        <label htmlFor="rating">Enter a new rating:</label>
+        <input
+          type="number"
+          name="rating"
+          id="rating"
+          min={0}
+          max={5}
+          value={newRating}
+          onChange={({ target }) => setNewRating(target.value)}
+        />
+      </div>
       <div className={styles.grid}>
-        {drinks.map((drink) => (
+        {drinks.map((drink: Cocktail) => (
           <Card key={drink.id}>
             <Avatar />
-            <Details drink={drink} />
-            <button onClick={() => handleRating(drink)}>Update Rating</button>
+            <Details drink={drink} onClick={() => handleRating(drink)} />
           </Card>
         ))}
       </div>

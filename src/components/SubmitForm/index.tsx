@@ -1,13 +1,18 @@
 import { useState } from "react";
 import store, { Cocktail } from "../../store";
 import styles from "./SubmitForm.module.css";
-import { createCocktail } from "../../store";
+import { createDrink } from "../../store/drinkReducer";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SubmitForm = () => {
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [vendor, setVendor] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const addCocktail = (e: any) => {
     e.preventDefault();
@@ -16,17 +21,20 @@ const SubmitForm = () => {
       title,
       vendor,
       average: 0,
-      id: store.getState().length + 1,
+      id: store.getState().drinks.length + 1,
       reviews: 0,
       ratings: []
     };
-    store.dispatch(createCocktail(newCocktail));
+    dispatch(createDrink(newCocktail));
     setTitle("");
     setArtist("");
     setVendor("");
     //setAverage(0);
     setSuccessMsg("Cocktail added successfully.");
-    setTimeout(() => setSuccessMsg(""), 3000);
+    setTimeout(() => {
+      setSuccessMsg("")
+      navigate('/')
+    }, 2000);
   };
 
   return (

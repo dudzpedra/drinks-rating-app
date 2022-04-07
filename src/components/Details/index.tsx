@@ -1,11 +1,17 @@
+import { MouseEventHandler, useEffect } from 'react';
 import { Cocktail } from '../../store';
 import styles from './Details.module.css'
 
 type DetailsProps = {
-    drink: Cocktail
+    drink: Cocktail,
+    onClick: MouseEventHandler
 }
 
-const Details = ({ drink }: DetailsProps) => {
+const Details = ({ drink, onClick }: DetailsProps) => {
+  useEffect(() => {
+    
+  }, [])
+
   const labelToShow = drink.reviews === 1 ? 'review' : 'reviews'
   return (
     <div className={styles.container}>
@@ -17,6 +23,7 @@ const Details = ({ drink }: DetailsProps) => {
         <p>{drink.title}, by {drink.artist}</p>
         <p>{drink.vendor}</p>
       </div>
+      <button onClick={onClick}>Update Rating</button>
     </div>
   );
 };
