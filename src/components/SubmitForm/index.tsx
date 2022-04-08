@@ -21,7 +21,7 @@ const SubmitForm = () => {
       title,
       vendor,
       average: 0,
-      id: store.getState().drinks.length + 1,
+      id: store.getState().drinks.drinks.length + 1,
       reviews: 0,
       ratings: []
     };

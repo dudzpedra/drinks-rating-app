@@ -1,25 +1,35 @@
 import { initialState } from "./data";
 import { Cocktail } from ".";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getAll } from "../services/drinks";
+
+export const fetchDrinks = createAsyncThunk('fetchDrinks', async () => {
+  return await getAll()
+})
 
 const drinkSlice = createSlice({
   name: "drinks",
   initialState,
   reducers: {
     addDrink(state, action) {
-      state.push(action.payload);
+      state.drinks.push(action.payload);
     },
     updateDrink(state, action) {
       const { drink, rating } = action.payload;
-      const newDrink = state.find((d) => d.id === drink.id);
+      const newDrink = state.drinks.find((d) => d.id === drink.id);
       if (newDrink) {
         newDrink.reviews++;
         newDrink.ratings.push(rating);
         newDrink.average =
           newDrink.ratings.reduce((sum, r) => sum + r, 0) / newDrink.reviews;
       }
-    },
+    }
   },
+  extraReducers: {
+    [fetchDrinks.fulfilled.type]: (state, action) => {
+      state.drinks = action.payload
+    }
+  }
 });
 
 export const { addDrink, updateDrink } = drinkSlice.actions;

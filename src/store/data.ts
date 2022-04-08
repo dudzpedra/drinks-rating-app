@@ -1,6 +1,5 @@
-import { Cocktail } from "."
-
-export const initialState: Cocktail[] = [
+export const initialState = {
+    drinks: [
     {
         title: 'Anelis',
         artist: 'Mari Mesquita',
@@ -46,4 +45,4 @@ export const initialState: Cocktail[] = [
         reviews: 1,
         ratings: [5]
     },
-]
+]}

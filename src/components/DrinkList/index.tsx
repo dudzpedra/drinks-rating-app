@@ -3,15 +3,18 @@ import Card from "../Card";
 import store, { Cocktail } from "../../store";
 import Avatar from "../ui/Avatar";
 import Details from "../Details";
-import { useState } from "react";
-import { updateCocktail } from "../../store/drinkReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchDrinks, updateCocktail } from "../../store/drinkReducer";
+import { useDispatch } from "react-redux";
 
 const DrinkList = () => {
-  const drinks = store.getState().drinks;
-  const cocktails = useSelector((state) => state);
-  console.log("cocktails", cocktails);
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchDrinks())
+  }, [dispatch])
+
+  const drinks = store.getState().drinks.drinks;
 
   const [newRating, setNewRating] = useState("");
 
